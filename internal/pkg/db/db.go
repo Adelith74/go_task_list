@@ -10,14 +10,14 @@ var db *sql.DB
 
 func InitDB() error {
 	var err error
-	connStr := "user=postgres password=1234 sslmode=disable"
+	connStr := "user=postgres password=1234 dbname=task_tracker sslmode=disable"
 	db, err = sql.Open("postgres", connStr)
 	if err != nil {
-		panic(err.Error())
+		panic(err.Error() + " unable to establisk connection to db: row 14 of db.go")
 	}
 	defer db.Close()
 
-	_, err = db.Exec("CREATE DATABASE IF NOT EXISTS task_tracker")
+	_, err = db.Exec("SELECT * from tasks")
 	if err != nil {
 		panic(err.Error())
 	}

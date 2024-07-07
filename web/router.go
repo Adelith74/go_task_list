@@ -9,8 +9,7 @@ import (
 func StartRouter() {
 	router := gin.Default()
 	router.LoadHTMLFiles("../web/templates/default.html")
-	router.Static("/static", "../static")
-
+	router.Static("/static", "../web/static")
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "default.html", gin.H{
 			"title": "Task list",
