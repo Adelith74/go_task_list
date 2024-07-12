@@ -40,10 +40,11 @@
 
   .header {
     text-align: center;
-    background-color: mediumturquoise;
+    background-color: rgb(177, 146, 255);
   }
 
   h1 {
+    margin: 0;
     color: white;
     font-family: Montserrat;
   }
@@ -53,12 +54,25 @@
     color: white;
   }
 
+  textarea {
+    width: 70%;
+    height: 30px;
+    font-family: Montserrat;
+  }
+
+  body {
+    margin: 0;
+  }
+
   .modal-button {
-    background-color: green;
+    background-color: rgb(177, 146, 255);
     border-radius: 10px;
     width: 100px;
     height: 50px;
     color: white;
     font-family: Montserrat;
     font-size: 19px;
+    margin-left: 15px;
   }
+
+ 

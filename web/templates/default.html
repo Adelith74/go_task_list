@@ -4,24 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/default.css">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <title>Your task tracker</title>
 </head>
 <body>
     <div id="header" class="header">
+        <br>
         <h1>Task tracker</h1>
-        <p style="padding: 3px;">This is simple task tracker. Click a button down below to add a new task to your tasks list.</p>
+        <p style="padding: 3px;">This is simple task tracker. Click a button down below to add a new task to your tasks list!</p>
     </div>
 
-    <button id="myBtn" class="modal-button">Open Modal</button>
+    <div class="search_bar" style="display: flex; justify-content: center; align-items: center;">
+        <img src="/static/loopa.png" width="16px" height="16px" style="padding-right: 5px; align-self: center;">
+        <textarea id="search" placeholder="Type your task title to find it!" style="border-radius: 5px; resize: none;"></textarea>
+        <button id="myBtn" class="modal-button" style="margin-left: 10px;">Add task</button>
+    </div>
 
     <!-- The Modal -->
     <div id="myModal" class="modal">
-
         <!-- Modal content -->
         <div class="modal-content">
             <span class="close">&times;</span>
             <p>Some text in the Modal..</p>
         </div>
-
     </div>
+    <script>
+        let search = document.getElementById("search")
+        search.addEventListener("input", () => {
+            console.log(event.target.value)
+        })
+    </script>
+    <script src="/static/script.js" defer></script>
 </body>
 </html>

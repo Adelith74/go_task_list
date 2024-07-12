@@ -5,8 +5,9 @@ import (
 )
 
 type Task struct {
-	Date        time.Time `db:"date"`
-	Title       string    `db:"title"`
-	Description string    `db:"description"`
-	Status      bool      `db:"status"`
+	User_id     int       `db:"user_id" json:"user_id"`
+	Created_at  time.Time `db:"created_at" json:"created_at"`
+	Title       string    `db:"title" json:"title"`
+	Description string    `db:"description" json:"descrption"`
+	Status      bool      `db:"status" json:"status"`
 }
