@@ -47,6 +47,7 @@
     margin: 0;
     color: white;
     font-family: Montserrat;
+    font-size: 50px;
   }
 
   p {
@@ -73,6 +74,13 @@
     font-family: Montserrat;
     font-size: 19px;
     margin-left: 15px;
+  }
+
+  .task_list{
+    display:flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
   }
 
  

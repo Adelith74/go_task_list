@@ -16,6 +16,13 @@ let promise = fetch("http://localhost:8080/get_tasks", {
     let elem = document.getElementById("taskList")
     data.forEach(element => {
         let div = formTaskDiv(element)
+        div.style.margin = "20px"
+        div.style.marginLeft = "50px"
+        div.style.marginRight = "50px"
+        div.style.boxSizing = "border-box"
+        div.style.padding = "10px"
+        div.style.borderRadius = "20px"
+        div.style.width = "70%"
         elem.appendChild(div)
     });
 })
@@ -26,24 +33,41 @@ let promise = fetch("http://localhost:8080/get_tasks", {
 function formTaskDiv(element){
     var div = document.createElement("div")
     div.style.backgroundColor = "rgb(177, 146, 255)"
-    var p = document.createElement("p")
-    p.textContent = element.title
+    var t = document.createElement("p")
+    var ttdiv = document.createElement("div")
+    t.textContent = element.title
+    t.style.fontFamily = "Montserrat"
+    t.style.fontSize = "50px"
+    t.style.padding = "5px"
+    t.style.paddingLeft = "30px"
+    t.style.margin = "0"
+    ttdiv.appendChild(t)
+    ttdiv.style.background = "rgb(147, 124, 205)"
+    ttdiv.style.borderRadius = "13px"
+    ttdiv.style.margin = "3px"
+    div.appendChild(ttdiv)
+    let p = document.createElement("p")
     p.style.color = "black"
     p.style.fontFamily = "Montserrat"
+    p.textContent = new Date(element.created_at).toUTCString()
     div.appendChild(p)
     p = document.createElement("p")
     p.style.color = "black"
     p.style.fontFamily = "Montserrat"
-    p.textContent = element.created_at
-    div.appendChild(p)
-    p = document.createElement("p")
-    p.style.color = "black"
-    p.style.fontFamily = "Montserrat"
-    p.textContent = element.description
+    p.textContent = "Description: " + element.description
     div.appendChild(p)
     p = document.createElement("input")
     p.setAttribute("type", "checkbox")
     p.checked = element.status
     div.appendChild(p)
+    var trash = document.createElement("img")
+    trash.src = "/static/trash.ico"
+    trash.style.width = "32px"
+    trash.style.height = "32px"
+    var button = document.createElement("button")
+    button.style.backgroundColor = "rgba(0,0,0,0)"
+    button.style.border = "0"
+    button.appendChild(trash)
+    div.appendChild(button)
     return div
 }
