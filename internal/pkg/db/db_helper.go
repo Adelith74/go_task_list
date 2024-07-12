@@ -24,7 +24,7 @@ func (helper *DB_Helper) GetAllTasks() ([]models.Task, error) {
 	tasks := []models.Task{}
 	for result.Next() {
 		task := models.Task{}
-		err := result.Scan(&task)
+		err := result.Scan(&task.User_id, &task.Created_at, &task.Title, &task.Description, &task.Status)
 		if err != nil {
 			return nil, err
 		}
