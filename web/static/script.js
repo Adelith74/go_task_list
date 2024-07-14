@@ -13,22 +13,27 @@ let promise = fetch("http://localhost:8080/get_tasks", {
 })
 .then(data => {
     console.log(data)
+    localStorage.setItem("tasks", JSON.stringify(data))
     let elem = document.getElementById("taskList")
     data.forEach(element => {
         let div = formTaskDiv(element)
-        div.style.margin = "20px"
-        div.style.marginLeft = "50px"
-        div.style.marginRight = "50px"
-        div.style.boxSizing = "border-box"
-        div.style.padding = "10px"
-        div.style.borderRadius = "20px"
-        div.style.width = "70%"
+        setTaskDivStyle(div)
         elem.appendChild(div)
     });
 })
 .catch(error => {
     console.error('There was a problem with your fetch operation:', error);
 });
+
+function setTaskDivStyle(div){
+    div.style.margin = "20px"
+    div.style.marginLeft = "50px"
+    div.style.marginRight = "50px"
+    div.style.boxSizing = "border-box"
+    div.style.padding = "10px"
+    div.style.borderRadius = "20px"
+    div.style.width = "70%"
+}
 
 function formTaskDiv(element){
     var div = document.createElement("div")
@@ -67,25 +72,42 @@ function formTaskDiv(element){
     trash.src = "/static/trash.ico"
     trash.style.width = "32px"
     trash.style.height = "32px"
-    var button = document.createElement("button")
-    button.style.backgroundColor = "rgba(0,0,0,0)"
-    button.style.border = "0"
-    button.style.marginLeft = "auto"
+    var button = formDeleteButton()
     button.appendChild(trash)
     ttdiv.appendChild(button)
     ttdiv.style.display = "flex"
     ttdiv.style.flexDirection = "row"
     ttdiv.style.alignItems = "flex-start"
     div.appendChild(ttdiv)
-    p = document.createElement("p")
-    p.style.color = "black"
-    p.style.fontFamily = "Montserrat"
-    p.textContent = new Date(element.created_at).toUTCString()
-    div.appendChild(p)
+    div.appendChild(formDateP(element))
     p = document.createElement("p")
     p.style.color = "black"
     p.style.fontFamily = "Montserrat"
     p.textContent = "Description: " + element.description
     div.appendChild(p)
     return div
+}
+
+function formDateP(element){
+    var p = document.createElement("p")
+    p.style.color = "black"
+    p.style.fontFamily = "Montserrat"
+    p.textContent = new Date(element.created_at).toUTCString()
+    return p
+}
+
+function formTitleDiv() {
+
+}
+
+function formDeleteButton(){
+    var button = document.createElement("button")
+    button.style.backgroundColor = "rgba(0,0,0,0)"
+    button.style.border = "0"
+    button.style.marginLeft = "auto"
+    button.style.cursor = "pointer"
+    button.onclick = () => {
+        window.location.href = "http://google.com";
+    }
+    return button
 }

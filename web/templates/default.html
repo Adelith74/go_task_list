@@ -10,14 +10,15 @@
 <body>
     <div id="header" class="header">
         <br>
+        <button class="logoutButton" style="margin-left: auto;">Logout</button>
         <h1>Task tracker</h1>
         <p style="padding: 3px;">This is simple task tracker. Click a button down below to add a new task to your tasks list!</p>
     </div>
 
-    <div class="search_bar" style="display: flex; justify-content: center; align-items: center;">
+    <div class="search_bar" style="display: flex; justify-content: center; align-items: center; margin-left: 90px;">
         <img src="/static/loopa.png" width="16px" height="16px" style="padding-right: 5px; align-self: center;">
         <textarea id="search" placeholder="Type your task title to find it!" style="border-radius: 15px; resize: none; padding: 10px; padding-bottom: 0px;"></textarea>
-        <button id="myBtn" class="modal-button" style="margin-left: 10px; border: 0;">Add task</button>
+        <button id="myBtn" class="modal-button" style="margin-left: 10px; border: 0; cursor: pointer;">Add task</button>
     </div>
 
     <div class="task_list" id="taskList">
@@ -25,9 +26,12 @@
     <!-- The Modal -->
     <div id="myModal" class="modal">
         <!-- Modal content -->
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>Some text in the Modal..</p>
+        <div class="modal-content" style="display: flex; flex-direction: column; gap: 7px; align-items: center;">
+            <span class="close" style="margin-left: auto">&times;</span>
+            <h2 style="color: black; font-family: Montserrat; margin: 0; text-align: center;">Create a new task</h1>
+            <textarea id="search" placeholder="Type title here" style="border-radius: 15px; resize: none; padding: 10px; padding-bottom: 0px; text-align: left;"></textarea>
+            <textarea id="search" placeholder="Type description here" style="border-radius: 15px; padding: 10px; padding-bottom: 0px; min-width: 70%; max-width: 70%; min-height: 30px; text-align: left;"></textarea>
+            <button class="modal-button" style="margin-left: 10px; border: 0; cursor: pointer;">Add task</button>
         </div>
     </div>
     <script>
@@ -35,6 +39,31 @@
         search.addEventListener("input", () => {
             console.log(event.target.value)
         })
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on the button, open the modal
+        btn.onclick = function() {
+        modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+        modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+        }
     </script>
     <script src="/static/script.js" defer></script>
 </body>
