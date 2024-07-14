@@ -61,6 +61,7 @@ function formTaskDiv(element){
     t.style.padding = "5px"
     t.style.paddingLeft = "30px"
     t.style.margin = "0"
+    t.className = "title"
     if (element.status) {
         t.style.textDecoration = "line-through"
     }

@@ -37,7 +37,15 @@
     <script>
         let search = document.getElementById("search")
         search.addEventListener("input", () => {
-            console.log(event.target.value)
+            let titles = document.getElementById("taskList").getElementsByClassName('title')
+            Array.from(titles).forEach(element => {
+                if (!element.textContent.includes(event.target.value)){
+                    element.parentElement.parentElement.style.display = "none"
+                } else {
+                    element.parentElement.parentElement.style.display = "block"
+                }
+            });
+            
         })
         // Get the modal
         var modal = document.getElementById("myModal");
