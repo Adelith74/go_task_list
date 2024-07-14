@@ -35,18 +35,49 @@ function formTaskDiv(element){
     div.style.backgroundColor = "rgb(177, 146, 255)"
     var t = document.createElement("p")
     var ttdiv = document.createElement("div")
+    var p = document.createElement("input")
+    p.setAttribute("type", "checkbox")
+    p.checked = element.status
+    p.style.marginLeft = "10px"
+    p.style.marginTop = "10px"
+    p.addEventListener('change', function(event) {
+        var parentDiv = this.parentNode;
+        var el = parentDiv.querySelector('p');
+        if (event.currentTarget.checked) {
+            el.style.textDecoration = "line-through"
+          } else {
+            el.style.textDecoration = "none"
+          }
+    })
+    ttdiv.appendChild(p)
     t.textContent = element.title
     t.style.fontFamily = "Montserrat"
     t.style.fontSize = "50px"
     t.style.padding = "5px"
     t.style.paddingLeft = "30px"
     t.style.margin = "0"
+    if (element.status) {
+        t.style.textDecoration = "line-through"
+    }
     ttdiv.appendChild(t)
     ttdiv.style.background = "rgb(147, 124, 205)"
     ttdiv.style.borderRadius = "13px"
     ttdiv.style.margin = "3px"
+    var trash = document.createElement("img")
+    trash.src = "/static/trash.ico"
+    trash.style.width = "32px"
+    trash.style.height = "32px"
+    var button = document.createElement("button")
+    button.style.backgroundColor = "rgba(0,0,0,0)"
+    button.style.border = "0"
+    button.style.marginLeft = "auto"
+    button.appendChild(trash)
+    ttdiv.appendChild(button)
+    ttdiv.style.display = "flex"
+    ttdiv.style.flexDirection = "row"
+    ttdiv.style.alignItems = "flex-start"
     div.appendChild(ttdiv)
-    let p = document.createElement("p")
+    p = document.createElement("p")
     p.style.color = "black"
     p.style.fontFamily = "Montserrat"
     p.textContent = new Date(element.created_at).toUTCString()
@@ -56,18 +87,5 @@ function formTaskDiv(element){
     p.style.fontFamily = "Montserrat"
     p.textContent = "Description: " + element.description
     div.appendChild(p)
-    p = document.createElement("input")
-    p.setAttribute("type", "checkbox")
-    p.checked = element.status
-    div.appendChild(p)
-    var trash = document.createElement("img")
-    trash.src = "/static/trash.ico"
-    trash.style.width = "32px"
-    trash.style.height = "32px"
-    var button = document.createElement("button")
-    button.style.backgroundColor = "rgba(0,0,0,0)"
-    button.style.border = "0"
-    button.appendChild(trash)
-    div.appendChild(button)
     return div
 }
