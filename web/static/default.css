@@ -43,6 +43,8 @@
     background-color: rgb(177, 146, 255);
     display: flex;
     flex-direction: column;
+    align-items: center;
+    align-content: center;
     margin-bottom: 16px;
   }
 

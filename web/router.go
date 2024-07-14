@@ -14,7 +14,13 @@ func StartRouter(db *sql.DB) {
 	helper.Db = db
 	router := gin.Default()
 	router.Static("/static", "../web/static")
-	router.LoadHTMLFiles("../web/templates/default.html")
+	router.LoadHTMLFiles("../web/templates/default.html", "../web/templates/404.html")
+	router.NoRoute(func(c *gin.Context) {
+		c.HTML(http.StatusOK, "404.html", gin.H{
+			"title": "Task list",
+		})
+	})
+
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "default.html", gin.H{
 			"title": "Task list",

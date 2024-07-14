@@ -10,11 +10,13 @@ var db *sql.DB
 
 func createTasksTable() error {
 	_, err := db.Exec(`CREATE TABLE tasks (
-  	user_id SERIAL PRIMARY KEY,  
+  	user_id SERIAL,  
+	task_id SERIAL,
   	created_at TIMESTAMP NOT NULL, 
   	title VARCHAR NOT NULL,
   	description VARCHAR,
-  	status BOOL);`)
+  	status BOOL,
+	PRIMARY KEY(user_id, task_id));`)
 	if err != nil {
 		return err
 	}

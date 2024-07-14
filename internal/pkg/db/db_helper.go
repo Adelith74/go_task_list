@@ -16,6 +16,10 @@ func GetHelper() *DB_Helper {
 	return &DB_Helper{}
 }
 
+func GetUser(username, password string) {
+
+}
+
 func (helper *DB_Helper) GetAllTasks() ([]models.Task, error) {
 	result, err := helper.Db.Query("SELECT * FROM public.tasks")
 	if err != nil {
