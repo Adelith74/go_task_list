@@ -108,7 +108,7 @@ function formDeleteButton(){
     button.style.marginLeft = "auto"
     button.style.cursor = "pointer"
     button.onclick = () => {
-        window.location.href = "http://google.com";
+        button.parentElement.parentElement.remove()
     }
     return button
 }
