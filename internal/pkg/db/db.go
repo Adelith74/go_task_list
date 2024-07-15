@@ -15,8 +15,19 @@ func createTasksTable() error {
   	created_at TIMESTAMP NOT NULL, 
   	title VARCHAR NOT NULL,
   	description VARCHAR,
-  	status BOOL,
+  	status BOOL NOT NULL,
 	PRIMARY KEY(user_id, task_id));`)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func createUsersTable() error {
+	_, err := db.Exec(`CREATE TABLE users (
+		user_id SERIAL PRIMARY KEY,  
+		username VARCHAR NOT NULL,
+		password VARCHAR NOT NULL);`)
 	if err != nil {
 		return err
 	}
@@ -45,8 +56,12 @@ func InitDB() (error, *sql.DB) {
 		panic(err.Error() + " unable to establisk connection to db: row 14 of db.go")
 	}
 	tasksExists := checkTablesExists("tasks")
+	usersExists := checkTablesExists("users")
 	if !tasksExists {
 		createTasksTable()
+	}
+	if !usersExists {
+		createUsersTable()
 	}
 	return nil, db
 }

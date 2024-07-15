@@ -3,9 +3,9 @@ package db
 import (
 	"database/sql"
 	"errors"
-	"fmt"
 	"go_task_list/internal/models"
 	_ "go_task_list/internal/models"
+	"time"
 )
 
 type DB_Helper struct {
@@ -16,8 +16,14 @@ func GetHelper() *DB_Helper {
 	return &DB_Helper{}
 }
 
-func GetUser(username, password string) {
-
+func (helper *DB_Helper) GetUser(username, password string) (*models.User, error) {
+	row, err := helper.Db.Query("SELECT * FROM public.users WHERE username=$1 AND password=$2", username, password)
+	if err != nil {
+		return nil, errors.New(err.Error() + ": error occured at db_helper.go:20")
+	}
+	user := &models.User{}
+	row.Scan(&user.Id, &user.Username)
+	return user, nil
 }
 
 func (helper *DB_Helper) GetAllTasks() ([]models.Task, error) {
@@ -28,7 +34,7 @@ func (helper *DB_Helper) GetAllTasks() ([]models.Task, error) {
 	tasks := []models.Task{}
 	for result.Next() {
 		task := models.Task{}
-		err := result.Scan(&task.User_id, &task.Created_at, &task.Title, &task.Description, &task.Status)
+		err := result.Scan(&task.User_id, &task.Task_id, &task.Created_at, &task.Title, &task.Description, &task.Status)
 		if err != nil {
 			return nil, err
 		}
@@ -37,7 +43,10 @@ func (helper *DB_Helper) GetAllTasks() ([]models.Task, error) {
 	return tasks, nil
 }
 
-func (helper *DB_Helper) InsertTask() {
-	task := models.Task{}
-	fmt.Println(task)
+func (helper *DB_Helper) InsertTask(user_id int, created_at time.Time, title string, description string) error {
+	_, err := helper.Db.Query("INSERT INTO public.tasks (user_id, created_at, title, description, status) VALUES($1, $2, $3, $4, false)", user_id, created_at, title, description)
+	if err != nil {
+		return errors.New(err.Error() + ": error at db_helper.go:47")
+	}
+	return nil
 }

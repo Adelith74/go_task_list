@@ -2,6 +2,7 @@ package web
 
 import (
 	"database/sql"
+	"go_task_list/internal/models"
 	database "go_task_list/internal/pkg/db"
 	"net/http"
 
@@ -33,6 +34,17 @@ func StartRouter(db *sql.DB) {
 			c.JSON(http.StatusInternalServerError, gin.H{"message": "error during fetching tasks from db"})
 		} else {
 			c.JSON(http.StatusOK, tasks)
+		}
+	})
+
+	router.POST("/insert_task", func(c *gin.Context) {
+		task := models.Task{}
+		c.BindJSON(&task)
+		err := helper.InsertTask(task.User_id, task.Created_at, task.Title, task.Description)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"message": "error during inserting tasks to db"})
+		} else {
+			c.JSON(http.StatusOK, "Successful")
 		}
 	})
 
