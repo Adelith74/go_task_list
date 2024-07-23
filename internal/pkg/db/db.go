@@ -50,7 +50,7 @@ func checkTablesExists(table_name string) bool {
 
 func InitDB() (error, *sql.DB) {
 	var err error
-	connStr := "user=postgres password=root dbname=task_tracker sslmode=disable"
+	connStr := "user=postgres password=root dbname=task_tracker sslmode=disable port=5432"
 	db, err = sql.Open("postgres", connStr)
 	if err != nil {
 		panic(err.Error() + " unable to establisk connection to db: row 14 of db.go")
